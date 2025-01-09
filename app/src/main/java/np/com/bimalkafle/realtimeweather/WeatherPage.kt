@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import np.com.bimalkafle.realtimeweather.api.NetworkResponse
+import np.com.bimalkafle.realtimeweather.api.WeatherModel
 
 
 @Composable
@@ -70,10 +71,15 @@ fun WeatherPage(viewModel: WeatherViewModel){
                 CircularProgressIndicator()
             }
             is NetworkResponse.Success -> {
-                Text(text = result.data.toString())
+                WeatherDetails(data = result.data)
             }
             null -> {}
         }
     }
+
+}
+
+@Composable
+fun WeatherDetails(date : WeatherModel){
 
 }
