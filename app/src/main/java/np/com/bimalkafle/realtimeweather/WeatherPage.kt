@@ -6,7 +6,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
@@ -81,5 +83,23 @@ fun WeatherPage(viewModel: WeatherViewModel){
 
 @Composable
 fun WeatherDetails(date : WeatherModel){
+    Column (
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ){
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.Bottom
+        ){
+            Icon(
+                imageVector = Icons.Default.LocationOn,
+                contentDescription = "Location icon",
+                modifier = Modifier.size(40.dp)
+            )
+        }
+    }
 
 }
