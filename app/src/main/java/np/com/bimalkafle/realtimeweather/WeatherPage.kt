@@ -27,6 +27,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -45,6 +46,8 @@ fun WeatherPage(viewModel: WeatherViewModel){
     }
 
     val weatherResult = viewModel.weatherResult.observeAsState()
+
+    val keyboardController = LocalSoftwareKeyboardController.current
 
 
     Column (
@@ -68,6 +71,7 @@ fun WeatherPage(viewModel: WeatherViewModel){
             )
             IconButton(onClick = {
                 viewModel.getData(city)
+                keyboardController?.hide()
             }) {
                 Icon(imageVector = Icons.Default.Search,
                     contentDescription = "Search for any location"
@@ -129,7 +133,7 @@ fun WeatherDetails(data : WeatherModel){
                     horizontalArrangement = Arrangement.SpaceAround
                 ){
                     WeatherKeyVal("Humidity",data.current.humidity)
-                    WeatherKeyVal("Wind Speed",data.current.wind_kph)
+                    WeatherKeyVal("Wind Speed",data.current.wind_kph+"km/h")
                 }
                 Row (
                     modifier = Modifier.fillMaxWidth(),
@@ -143,7 +147,13 @@ fun WeatherDetails(data : WeatherModel){
                     horizontalArrangement = Arrangement.SpaceAround
                 ){
                     WeatherKeyVal("UV",data.current.uv)
-                    WeatherKeyVal("Participation",data.current.precip_mm)
+                    WeatherKeyVal("Participation",data.current.precip_mm+"mm")
+                }
+                Row (
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceAround
+                ){
+                    WeatherKeyVal("last updated",data.current.last_updated)
                 }
                 }
             }
